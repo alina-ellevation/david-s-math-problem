@@ -1,5 +1,16 @@
 import sys
 from random import randint, uniform
+from time import time
+
+"""
+My attempt to solve the problem described [here](
+https://docs.google.com/spreadsheets/d/1KUvpZT9IOREcizxc748sMsW8PaFXebNn/edit?usp=sharing&ouid=102887382140232301714&rtpof=true&sd=true).
+
+I'm not a Math wiz, so rather than looking to set d11 using an equation or formula,
+I replicated a more "human" approach: keep messing around with d11
+but choose its value slightly more deliberately each time (based on previous results).
+It's dirty, but it's pretty quick.
+"""
 
 
 def main():
@@ -7,7 +18,7 @@ def main():
         # Before running this script, change these values to your liking
         # or comment out the line(s) to use the default.
         # See DocStrings further below for more context.
-        random_int_ceiling=100,
+        random_int_ceiling=1000,
         no_of_runs=1000,
     )
 
@@ -35,6 +46,7 @@ class ProblemSolver:
         IMPORTANT: I'm purposely NOT allowing *negative* ints for b11 and b13 for now -
         I'd have to change my algorithm to support those. Not there yet.
         """
+        start_time = time()
         self.successful_run_count = 0  # Start with fresh counts
         self.failed_run_count_zero_division = 0
         self.failed_run_count_other = 0
@@ -45,6 +57,7 @@ class ProblemSolver:
             f"\nSUCCESSFUL RUNS: {self.successful_run_count}"
             f"\nFAILED RUNS (ZERO DIVISION): {self.failed_run_count_zero_division}"
             f"\nFAILED RUNS (OTHER): {self.failed_run_count_other}"
+            f"\nThis took {time() - start_time} seconds."
         )
 
     def run(self, no_of_run, random_int_ceiling):
