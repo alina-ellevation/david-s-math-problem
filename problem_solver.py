@@ -5,7 +5,7 @@ from random import randint, uniform
 def main():
     ProblemSolver().lets_boogie(
         # Before running this script, change these values to your liking
-        # or comment out the line(s) to use the default().
+        # or comment out the line(s) to use the default.
         # See DocStrings further below for more context.
         random_int_ceiling=100,
         no_of_runs=1000,
