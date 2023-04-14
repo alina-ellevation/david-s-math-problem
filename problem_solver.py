@@ -13,7 +13,7 @@ def calculate(
     piece_of_1_lower_limit=0,
     piece_of_1_upper_limit=1,
 ):
-    # Set piece_of_1 to a random float within 0 and 1 with up to 2 decimals
+    # Set piece_of_1 to a random float within range (0-1 or smaller)
     piece_of_1 = uniform(piece_of_1_lower_limit, piece_of_1_upper_limit)
 
     # Calculate Excel cell values.
@@ -22,13 +22,13 @@ def calculate(
     result_2 = (start_val_2 * other_piece_of_1) - piece_of_1
 
     try:
-        # Check if result_val_1 and result_val_2 are within 1 percent of each other.
+        # Check if result values are within 1 percent of each other.
         percent_diff = abs((result_1 - result_2) / ((result_1 + result_2) / 2)) * 100
         if not percent_diff <= 1:
-            # If not, narrow down the range for piece_of_1 based on which result_val was larger:
-            if result_1 >= result_2:  # decrease upper limit (to try a smaller piece_of_1 next)
+            # If not, narrow down the piece_of_1 range based on which result was larger:
+            if result_1 >= result_2:  # decrease upper limit = try smaller value next
                 piece_of_1_upper_limit = piece_of_1
-            else:  # or, increase lower limit (to try a larger piece_of_1 next).
+            else:  # or, increase lower limit = try larger value next.
                 piece_of_1_lower_limit = piece_of_1
             # Now, do the whole thing again with the smaller range...
             calculate(
@@ -45,10 +45,10 @@ def calculate(
             print(df)
 
     except ZeroDivisionError:
-        # If result_val_1 or result_val_2 happen to be 0,
+        # If either of the results happens to be 0,
         # you can't calculate a percentage difference between them.
         # This stems from an "unlucky" combo of start_val_1, start_val_2 and piece_of_1,
-        # so let's just try again (which will start with a new piece_of_1).
+        # so let's just try again (which will generate a different piece_of_1 to start).
         calculate(start_val_1, start_val_2)
     except Exception as e:
         # Everything else should be considered an actual failure.
