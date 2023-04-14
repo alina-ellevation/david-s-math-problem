@@ -3,13 +3,16 @@ from random import uniform
 
 
 def main():
-    for i in range(0, 1000):
-        calculate()
+    for i in range(0, 1000):  # no of test runs
+        calculate(
+            start_val_1=round(uniform(0, 40), 2),
+            start_val_2=round(uniform(0, 40), 2),
+        )
 
 
 def calculate(
-    start_val_1=round(uniform(0, 40), 2),
-    start_val_2=round(uniform(0, 40), 2),
+    start_val_1,
+    start_val_2,
     piece_of_1_lower_limit=0,
     piece_of_1_upper_limit=1,
 ):
@@ -42,6 +45,7 @@ def calculate(
                 [start_val_2, other_piece_of_1, result_2]
             ]
             df = pd.DataFrame(data, columns=columns, index=['#1', '#2'])
+            print("\n")
             print(df)
 
     except ZeroDivisionError:
